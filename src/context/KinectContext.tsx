@@ -60,15 +60,6 @@ interface KinectContextType {
   updateActionStatus: (actionId: string, newStatus: ActionItem['status']) => void;
   addAuditLog: (entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => void;
 
-  // Mobile Companion Simulator
-  isMobileDrawerOpen: boolean;
-  setIsMobileDrawerOpen: (open: boolean) => void;
-  mobileCustomerId: string;
-  setMobileCustomerId: (id: string) => void;
-  mobileScreen: 'home' | 'opportunityDetail' | 'application' | 'wellness' | 'advisor' | 'notifications';
-  setMobileScreen: (screen: 'home' | 'opportunityDetail' | 'application' | 'wellness' | 'advisor' | 'notifications') => void;
-  openMobileSimulator: (customerId?: string, screen?: 'home' | 'opportunityDetail' | 'application' | 'wellness' | 'advisor' | 'notifications') => void;
-
   // Live Scenario Runner
   activeScenarioId: string | null;
   activeScenarioStep: number;
@@ -96,11 +87,6 @@ export const KinectProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [actions, setActions] = useState<ActionItem[]>(INITIAL_ACTIONS);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(INITIAL_AUDIT_LOGS);
   const [demoScenarios] = useState<DemoScenario[]>(DEMO_SCENARIOS);
-
-  // Mobile state
-  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState<boolean>(false);
-  const [mobileCustomerId, setMobileCustomerId] = useState<string>('cust-rania');
-  const [mobileScreen, setMobileScreen] = useState<'home' | 'opportunityDetail' | 'application' | 'wellness' | 'advisor' | 'notifications'>('home');
 
   // Scenario runner state
   const [activeScenarioId, setActiveScenarioId] = useState<string | null>(null);
@@ -149,12 +135,6 @@ export const KinectProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
     setActiveView('recommendationStudio');
   }, [signals]);
-
-  const openMobileSimulator = useCallback((customerId?: string, screen?: 'home' | 'opportunityDetail' | 'application' | 'wellness' | 'advisor' | 'notifications') => {
-    if (customerId) setMobileCustomerId(customerId);
-    if (screen) setMobileScreen(screen);
-    setIsMobileDrawerOpen(true);
-  }, []);
 
   const addAuditLog = useCallback((entry: Omit<AuditLogEntry, 'id' | 'timestamp'>) => {
     const newEntry: AuditLogEntry = {
@@ -287,25 +267,23 @@ export const KinectProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           if (scenarioId === 'rania') {
             setSelectedCustomerId('cust-rania');
             setSelectedSignalId('sig-rania-01');
-            // Auto open mobile simulator for Rania
-            setMobileCustomerId('cust-rania');
-            setMobileScreen('opportunityDetail');
-            setIsMobileDrawerOpen(true);
+            setActiveView('customerPortal');
           } else if (scenarioId === 'tariq') {
             setSelectedCustomerId('cust-tariq');
             setSelectedSignalId('sig-tariq-02');
-            setMobileCustomerId('cust-tariq');
-            setMobileScreen('wellness');
-            setIsMobileDrawerOpen(true);
+            setActiveView('customerPortal');
           } else if (scenarioId === 'leila') {
             setSelectedCustomerId('cust-leila');
             setSelectedSignalId('sig-leila-03');
+            setActiveView('customerPortal');
           } else if (scenarioId === 'omar') {
             setSelectedCustomerId('cust-omar');
             setSelectedSignalId('sig-omar-04');
+            setActiveView('customerPortal');
           } else if (scenarioId === 'aisha') {
             setSelectedCustomerId('cust-aisha');
             setSelectedSignalId('sig-aisha-05');
+            setActiveView('customerPortal');
           }
         }
       }
@@ -350,14 +328,6 @@ export const KinectProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         dismissSignal,
         updateActionStatus,
         addAuditLog,
-
-        isMobileDrawerOpen,
-        setIsMobileDrawerOpen,
-        mobileCustomerId,
-        setMobileCustomerId,
-        mobileScreen,
-        setMobileScreen,
-        openMobileSimulator,
 
         activeScenarioId,
         activeScenarioStep,

@@ -19,7 +19,8 @@ export type ViewId =
   | 'signalLibrary'
   | 'productCatalogue'
   | 'auditGovernance'
-  | 'demoSimulator';
+  | 'demoSimulator'
+  | 'customerPortal';
 
 export interface Customer {
   id: string;

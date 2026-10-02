@@ -9,7 +9,7 @@ import {
   HeartHandshake,
   UserCheck,
   ChevronRight,
-  Smartphone,
+  Globe,
   PhoneCall,
   Calendar,
   AlertCircle,
@@ -23,7 +23,8 @@ export const ProtectionQueueScreen: React.FC = () => {
     customers,
     viewSignalDetail,
     openRecommendationStudio,
-    openMobileSimulator,
+    setSelectedCustomerId,
+    setActiveView,
     dismissSignal,
   } = useKinect();
 
@@ -163,11 +164,15 @@ export const ProtectionQueueScreen: React.FC = () => {
                           <span>Review Support Options</span>
                         </button>
                         <button
-                          onClick={() => openMobileSimulator(cust.id, 'wellness')}
-                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
-                          title="Simulate Tariq's Mobile Check-in"
+                          onClick={() => {
+                            setSelectedCustomerId(cust.id);
+                            setActiveView('customerPortal');
+                          }}
+                          className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 text-xs"
+                          title="View in Customer Online Banking Portal"
                         >
-                          <Smartphone className="w-3.5 h-3.5 text-amber-300" />
+                          <Globe className="w-3.5 h-3.5 text-amber-300" />
+                          <span>Portal</span>
                         </button>
                       </div>
                     </td>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { KinectProvider, useKinect } from './context/KinectContext';
 import { DesktopShell } from './components/layout/DesktopShell';
-import { MobileDrawerModal } from './components/layout/MobileDrawerModal';
 
 import { OverviewScreen } from './components/screens/OverviewScreen';
 import { CustomersScreen } from './components/screens/CustomersScreen';
@@ -16,6 +15,7 @@ import { SignalLibraryScreen } from './components/screens/SignalLibraryScreen';
 import { ProductCatalogueScreen } from './components/screens/ProductCatalogueScreen';
 import { AuditGovernanceScreen } from './components/screens/AuditGovernanceScreen';
 import { DemoSimulatorScreen } from './components/screens/DemoSimulatorScreen';
+import { CustomerPortalScreen } from './components/screens/CustomerPortalScreen';
 
 const MainWorkspaceContent: React.FC = () => {
   const { activeView } = useKinect();
@@ -35,9 +35,7 @@ const MainWorkspaceContent: React.FC = () => {
       {activeView === 'productCatalogue' && <ProductCatalogueScreen />}
       {activeView === 'auditGovernance' && <AuditGovernanceScreen />}
       {activeView === 'demoSimulator' && <DemoSimulatorScreen />}
-
-      {/* Interactive Mobile Companion Phone Frame */}
-      <MobileDrawerModal />
+      {activeView === 'customerPortal' && <CustomerPortalScreen />}
     </DesktopShell>
   );
 };

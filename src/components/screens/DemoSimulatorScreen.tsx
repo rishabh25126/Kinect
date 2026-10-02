@@ -6,7 +6,7 @@ import {
   RotateCcw, 
   Sparkles, 
   ShieldAlert, 
-  Smartphone, 
+  Globe, 
   CheckCircle2, 
   Clock, 
   Layers, 
@@ -24,7 +24,7 @@ export const DemoSimulatorScreen: React.FC = () => {
     activeScenarioStep,
     isScenarioRunning,
     scenarioLogs,
-    openMobileSimulator,
+    setSelectedCustomerId,
     setActiveView,
   } = useKinect();
 
@@ -126,11 +126,14 @@ export const DemoSimulatorScreen: React.FC = () => {
             )}
 
             <button
-              onClick={() => openMobileSimulator(currentScenario.id === 'tariq' ? 'cust-tariq' : 'cust-rania')}
+              onClick={() => {
+                setSelectedCustomerId(currentScenario.id === 'tariq' ? 'cust-tariq' : 'cust-rania');
+                setActiveView('customerPortal');
+              }}
               className="py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center gap-1.5"
             >
-              <Smartphone className="w-3.5 h-3.5 text-amber-300" />
-              <span>Open ENBD Mobile Screen</span>
+              <Globe className="w-3.5 h-3.5 text-amber-300" />
+              <span>Open Customer Online Banking Screen</span>
             </button>
           </div>
         </div>

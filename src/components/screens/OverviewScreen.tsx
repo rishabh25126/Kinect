@@ -15,7 +15,7 @@ import {
   PlayCircle,
   Activity,
   UserCheck,
-  Smartphone,
+  Globe,
   PhoneCall,
   CheckCircle2
 } from 'lucide-react';
@@ -29,7 +29,7 @@ export const OverviewScreen: React.FC = () => {
     viewSignalDetail,
     viewCustomerDetail,
     runScenario,
-    openMobileSimulator,
+    setSelectedCustomerId,
   } = useKinect();
 
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d'>('7d');
@@ -344,12 +344,14 @@ export const OverviewScreen: React.FC = () => {
                         </button>
                         <button
                           onClick={() => {
-                            openMobileSimulator(cust.id, sig.mode === 'opportunity' ? 'opportunityDetail' : 'wellness');
+                            setSelectedCustomerId(cust.id);
+                            setActiveView('customerPortal');
                           }}
-                          className="p-1 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30"
-                          title="Preview in ENBD Mobile"
+                          className="px-2.5 py-1 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 flex items-center gap-1 font-medium"
+                          title="View Customer Online Banking Portal"
                         >
-                          <Smartphone className="w-3.5 h-3.5" />
+                          <Globe className="w-3.5 h-3.5" />
+                          <span>Portal</span>
                         </button>
                       </div>
                     </td>
@@ -464,8 +466,8 @@ export const OverviewScreen: React.FC = () => {
             <div>
               <div className="flex justify-between text-slate-300 font-medium">
                 <span className="flex items-center gap-1.5">
-                  <Smartphone className="w-3.5 h-3.5 text-blue-400" />
-                  In-App Contextual Card
+                  <Globe className="w-3.5 h-3.5 text-blue-400" />
+                  Online Banking / In-App Moment
                 </span>
                 <span className="font-mono font-bold text-emerald-400">38.4%</span>
               </div>

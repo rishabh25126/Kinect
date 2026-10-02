@@ -7,7 +7,7 @@ import {
   Filter, 
   SlidersHorizontal, 
   ChevronRight, 
-  Smartphone, 
+  Globe, 
   UserCheck, 
   Sparkles, 
   ShieldAlert,
@@ -21,7 +21,8 @@ export const CustomersScreen: React.FC = () => {
     signals,
     viewCustomerDetail,
     viewSignalDetail,
-    openMobileSimulator,
+    setSelectedCustomerId,
+    setActiveView,
     globalSearch,
     setGlobalSearch,
   } = useKinect();
@@ -270,13 +271,14 @@ export const CustomersScreen: React.FC = () => {
                     <td className="py-3.5 px-4 text-right" onClick={(e) => e.stopPropagation()}>
                       <button
                         onClick={() => {
-                          openMobileSimulator(cust.id, activeSignal?.mode === 'opportunity' ? 'opportunityDetail' : 'wellness');
+                          setSelectedCustomerId(cust.id);
+                          setActiveView('customerPortal');
                         }}
                         className="py-1 px-2.5 rounded-lg bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-medium inline-flex items-center gap-1.5 transition-all"
-                        title="Simulate on customer's phone"
+                        title="View Customer Online Banking Portal"
                       >
-                        <Smartphone className="w-3.5 h-3.5 text-amber-300" />
-                        <span>Mobile</span>
+                        <Globe className="w-3.5 h-3.5" />
+                        <span>Portal</span>
                       </button>
                     </td>
                   </tr>

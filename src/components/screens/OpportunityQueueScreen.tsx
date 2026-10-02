@@ -12,7 +12,7 @@ import {
   HelpCircle,
   ArrowRight,
   ChevronRight,
-  Smartphone,
+  Globe,
   CheckCircle,
   XCircle
 } from 'lucide-react';
@@ -23,7 +23,8 @@ export const OpportunityQueueScreen: React.FC = () => {
     customers,
     viewSignalDetail,
     openRecommendationStudio,
-    openMobileSimulator,
+    setSelectedCustomerId,
+    setActiveView,
     dismissSignal,
   } = useKinect();
 
@@ -182,11 +183,15 @@ export const OpportunityQueueScreen: React.FC = () => {
                           <span>Generate Draft</span>
                         </button>
                         <button
-                          onClick={() => openMobileSimulator(cust.id, 'opportunityDetail')}
-                          className="p-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300"
-                          title="Mobile Preview"
+                          onClick={() => {
+                            setSelectedCustomerId(cust.id);
+                            setActiveView('customerPortal');
+                          }}
+                          className="p-1 px-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 text-xs"
+                          title="View in Customer Online Banking Portal"
                         >
-                          <Smartphone className="w-3.5 h-3.5 text-amber-300" />
+                          <Globe className="w-3.5 h-3.5 text-amber-300" />
+                          <span>Portal</span>
                         </button>
                       </div>
                     </td>

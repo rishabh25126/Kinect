@@ -10,13 +10,12 @@ import {
   CheckCircle2,
   AlertTriangle,
   FileText,
-  Smartphone,
+  Globe,
   MessageSquare,
   PhoneCall,
   Send,
   RotateCw,
   Sliders,
-  Globe,
   Info,
   ChevronRight,
   ExternalLink
@@ -27,9 +26,9 @@ export const RecommendationStudioScreen: React.FC = () => {
     selectedSignal,
     selectedCustomer,
     selectedRecommendation,
+    setSelectedCustomerId,
     products,
     approveRecommendation,
-    openMobileSimulator,
     setActiveView,
     language,
     setLanguage,
@@ -435,11 +434,14 @@ export const RecommendationStudioScreen: React.FC = () => {
               </button>
 
               <button
-                onClick={() => openMobileSimulator(cust.id, sig.mode === 'opportunity' ? 'opportunityDetail' : 'wellness')}
+                onClick={() => {
+                  setSelectedCustomerId(cust.id);
+                  setActiveView('customerPortal');
+                }}
                 className="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 border border-slate-700"
               >
-                <Smartphone className="w-3.5 h-3.5 text-amber-400" />
-                <span>Live ENBD Mobile Preview</span>
+                <Globe className="w-3.5 h-3.5 text-amber-400" />
+                <span>View in Customer Online Banking (Desktop)</span>
               </button>
             </div>
           </div>

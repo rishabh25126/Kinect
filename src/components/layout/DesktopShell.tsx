@@ -12,7 +12,7 @@ import {
   BookOpen,
   FileCheck2,
   PlayCircle,
-  Smartphone,
+  Globe,
   Search,
   Bell,
   HelpCircle,
@@ -33,7 +33,6 @@ export const DesktopShell: React.FC<{ children: React.ReactNode }> = ({ children
     setGlobalSearch,
     signals,
     actions,
-    openMobileSimulator,
     language,
     setLanguage,
   } = useKinect();
@@ -55,6 +54,7 @@ export const DesktopShell: React.FC<{ children: React.ReactNode }> = ({ children
     { id: 'protectionQueue', label: 'Protection Queue', icon: ShieldAlert, badge: protCount, badgeColor: 'rose' },
     { id: 'actionCentre', label: 'Action Centre', icon: Send, badge: pendingActionsCount > 0 ? pendingActionsCount : undefined, badgeColor: 'amber' },
     { id: 'analytics', label: 'Analytics & Impact', icon: BarChart3 },
+    { id: 'customerPortal', label: 'Customer Online Banking', icon: Globe },
     { id: 'productCatalogue', label: 'Product Catalogue (RAG)', icon: BookOpen },
     { id: 'signalLibrary', label: 'Signal Library', icon: Sliders },
     { id: 'auditGovernance', label: 'Audit & AI Governance', icon: FileCheck2 },
@@ -96,6 +96,10 @@ export const DesktopShell: React.FC<{ children: React.ReactNode }> = ({ children
     analytics: {
       title: 'Analytics & Business Impact',
       subtitle: 'Measured conversion metrics, early risk prevention value, and precision analytics',
+    },
+    customerPortal: {
+      title: 'Emirates NBD Online Banking (Desktop Web Portal)',
+      subtitle: 'Customer browser portal showing personalized financial moments, loan calculators, and wellness support',
     },
     signalLibrary: {
       title: 'Signal Library & Rule Engine',
@@ -282,13 +286,17 @@ export const DesktopShell: React.FC<{ children: React.ReactNode }> = ({ children
               <span>Live Engine • 1.4k events/min</span>
             </div>
 
-            {/* Launch ENBD Mobile Journey Simulator Button */}
+            {/* Switch to Customer Online Banking Desktop Web Portal */}
             <button
-              onClick={() => openMobileSimulator('cust-rania', 'home')}
-              className="py-1.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-blue-900/40 transition-all hover:scale-[1.02]"
+              onClick={() => setActiveView(activeView === 'customerPortal' ? 'overview' : 'customerPortal')}
+              className={`py-1.5 px-3 rounded-xl font-semibold text-xs flex items-center gap-1.5 shadow-md transition-all hover:scale-[1.02] ${
+                activeView === 'customerPortal'
+                  ? 'bg-amber-500 text-slate-950 shadow-amber-950/40'
+                  : 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-blue-900/40'
+              }`}
             >
-              <Smartphone className="w-3.5 h-3.5 text-amber-300" />
-              <span>ENBD Mobile Preview</span>
+              <Globe className="w-3.5 h-3.5" />
+              <span>{activeView === 'customerPortal' ? 'Back to Kinect Command Centre' : 'Customer Online Banking'}</span>
             </button>
 
             {/* Notifications Bell */}

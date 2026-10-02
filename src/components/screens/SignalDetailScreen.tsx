@@ -14,7 +14,7 @@ import {
   ArrowRight,
   User,
   Shield,
-  Smartphone,
+  Globe,
   Layers,
   RotateCcw,
   Check
@@ -24,8 +24,9 @@ export const SignalDetailScreen: React.FC = () => {
   const {
     selectedSignal,
     selectedCustomer,
+    setSelectedCustomerId,
     openRecommendationStudio,
-    openMobileSimulator,
+    setActiveView,
     dismissSignal,
     auditLogs,
     addAuditLog,
@@ -86,11 +87,15 @@ export const SignalDetailScreen: React.FC = () => {
             <span>Open Recommendation Studio →</span>
           </button>
           <button
-            onClick={() => openMobileSimulator(selectedCustomer.id, selectedSignal.mode === 'opportunity' ? 'opportunityDetail' : 'wellness')}
-            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"
-            title="Preview in Mobile"
+            onClick={() => {
+              setSelectedCustomerId(selectedCustomer.id);
+              setActiveView('customerPortal');
+            }}
+            className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 flex items-center gap-1.5 text-xs font-semibold"
+            title="View in Customer Online Banking Portal"
           >
-            <Smartphone className="w-4 h-4 text-amber-400" />
+            <Globe className="w-4 h-4 text-amber-400" />
+            <span>Customer Portal</span>
           </button>
         </div>
       </div>

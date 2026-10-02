@@ -6,7 +6,7 @@ import { AiBadge } from '../common/AiBadge';
 import {
   User,
   Shield,
-  Smartphone,
+  Globe,
   CreditCard,
   TrendingUp,
   Clock,
@@ -26,11 +26,11 @@ import {
 export const Customer360Screen: React.FC = () => {
   const {
     selectedCustomer,
+    setSelectedCustomerId,
     signals,
     products,
     viewSignalDetail,
     openRecommendationStudio,
-    openMobileSimulator,
     setActiveView,
   } = useKinect();
 
@@ -101,11 +101,14 @@ export const Customer360Screen: React.FC = () => {
           )}
 
           <button
-            onClick={() => openMobileSimulator(selectedCustomer.id, activeSignal?.mode === 'opportunity' ? 'opportunityDetail' : 'wellness')}
+            onClick={() => {
+              setSelectedCustomerId(selectedCustomer.id);
+              setActiveView('customerPortal');
+            }}
             className="py-2 px-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 border border-slate-700"
           >
-            <Smartphone className="w-3.5 h-3.5 text-amber-400" />
-            <span>ENBD Mobile View</span>
+            <Globe className="w-3.5 h-3.5 text-amber-400" />
+            <span>Customer Online Banking View</span>
           </button>
         </div>
       </div>

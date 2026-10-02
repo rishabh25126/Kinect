@@ -10,7 +10,7 @@ import {
   RotateCcw, 
   Sparkles, 
   HeartHandshake, 
-  Smartphone,
+  Globe,
   Check,
   X
 } from 'lucide-react';
@@ -20,7 +20,8 @@ export const ActionCentreScreen: React.FC = () => {
   const {
     actions,
     updateActionStatus,
-    openMobileSimulator,
+    setSelectedCustomerId,
+    setActiveView,
     viewCustomerDetail,
     viewSignalDetail,
   } = useKinect();
@@ -152,11 +153,15 @@ export const ActionCentreScreen: React.FC = () => {
                       )}
 
                       <button
-                        onClick={() => openMobileSimulator(action.customerId)}
-                        className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300"
-                        title="Simulate in Mobile"
+                        onClick={() => {
+                          setSelectedCustomerId(action.customerId);
+                          setActiveView('customerPortal');
+                        }}
+                        className="p-1 px-2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1 text-xs"
+                        title="View in Customer Online Banking Portal"
                       >
-                        <Smartphone className="w-3.5 h-3.5 text-amber-300" />
+                        <Globe className="w-3.5 h-3.5 text-amber-300" />
+                        <span>Portal</span>
                       </button>
                     </div>
                   </td>
