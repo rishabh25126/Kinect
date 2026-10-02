@@ -1,0 +1,6 @@
+{
+  "name": "ENBD Kinect - AI Customer Intelligence",
+  "description": "Dual-mode AI customer intelligence platform for Emirates NBD featuring Opportunity & Protection queues, Signal Evidence Studio, Grounded AI Recommendations, and Mobile Banking journeys.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
